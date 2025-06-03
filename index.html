@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reflect Visual Only</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      function draw() {
+        background(0, 15);
+
+        let xoff = 0;
+        for (let x = 0; x < width; x += 20) {
+          let y = noise(xoff, t) * height;
+          fill(100 + 100 * sin(t), 150, 255, 100);
+          ellipse(x, y, 30, 30);
+          xoff += 0.05;
+        }
+
+        t += 0.01;
+
+        if (frameCount > 60 * 60) {
+          noLoop();
+        }
+      }
+    </script>
+  </body>
+</html>
